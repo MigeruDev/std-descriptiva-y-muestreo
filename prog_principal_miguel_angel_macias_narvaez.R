@@ -1,18 +1,20 @@
-# prog_principal_miguel_angel_macias_narvaez.R
-#
 # Soluciones para las tareas de estadística descriptiva y muestreo.
-# No se requieren paquetes adicionales; se utilizan funciones base de R.
+# Creado por: Miguel Angel Macias Narvaez
+
+# ---------------------------------------------------------------
+# Librerías Requeridas
+# ---------------------------------------------------------------
+# install.packages("ggplot2") # Ejecutar solo la primera vez
+library(ggplot2)
 
 # ---------------------------------------------------------------
 # Tarea 1: Análisis estadístico de un vector
 # ---------------------------------------------------------------
 
 #' Analiza un vector numérico y devuelve estadísticas básicas.
-#' 
+#'
 #' @param input_vector Vector entero a analizar.
 #' @return Una lista que contiene media, mediana, moda, varianza y desviación estándar muestral.
-#' @examples
-#' analyze_vector(c(1, 2, 2, 3))
 analyze_vector <- function(input_vector) {
   # Media
   mean_val <- mean(input_vector)
@@ -20,6 +22,7 @@ analyze_vector <- function(input_vector) {
   median_val <- median(input_vector)
   # Moda (valor con la frecuencia más alta)
   freq_table <- table(input_vector)
+  # En caso de que todos los números sean únicos, devuelve el primero.
   mode_val <- as.numeric(names(freq_table)[which.max(freq_table)])
   # Varianza muestral
   variance_val <- var(input_vector)
@@ -35,22 +38,43 @@ analyze_vector <- function(input_vector) {
   ))
 }
 
+# --- Ejecución Tarea 1 ---
 # Generar un vector aleatorio de tamaño 10
 my_vector <- sample(1:100, 10, replace = TRUE)
+cat("Vector generado aleatoriamente:", my_vector, "\n")
 
 # Analizar el vector e imprimir resultados
 analysis_results <- analyze_vector(my_vector)
 print(analysis_results)
 
-# Generar un diagrama de caja del vector
-boxplot(my_vector, main = "Boxplot del vector ingresado", ylab = "Valores")
+# Generar un diagrama de caja con ggplot2 y mostrarlo
+print(
+  ggplot(data.frame(valores = my_vector), aes(x = "", y = valores)) +
+    geom_boxplot(fill = "skyblue", color = "black", alpha = 0.7) +
+    geom_jitter(color = "darkgray", width = 0.1, alpha = 0.8) +
+    stat_summary(
+      fun = mean,
+      geom = "point",
+      shape = 18,
+      size = 4,
+      color = "red"
+    ) +
+    labs(
+      title = "Análisis Descriptivo del Vector",
+      subtitle = "Boxplot con Media (♦) y Puntos de Datos",
+      y = "Valores",
+      x = NULL
+    ) +
+    theme_minimal()
+)
+
 
 # ---------------------------------------------------------------
 # Tarea 2: Cálculo del tamaño de la muestra
 # ---------------------------------------------------------------
 
 #' Calcula el tamaño de muestra usando la fórmula para poblaciones finitas.
-#' 
+#'
 #' @param Z Puntaje Z correspondiente al nivel de confianza deseado.
 #' @param p Proporción de la población con el atributo.
 #' @param q Proporción de la población sin el atributo (1 - p).
@@ -64,8 +88,14 @@ calculate_sample_size <- function(Z, p, q, N, e) {
   return(n)
 }
 
+# --- Ejecución Tarea 2 ---
 # Calcular el tamaño de la muestra con los parámetros proporcionados
-n_result <- calculate_sample_size(Z = 1.96, p = 0.95, q = 0.05, N = 1068, e = 0.10)
+n_result <-
+  calculate_sample_size(Z = 1.96,
+                        p = 0.95,
+                        q = 0.05,
+                        N = 1068,
+                        e = 0.10)
 print(paste("Tamaño de muestra n:", n_result))
 
 # ---------------------------------------------------------------
@@ -76,6 +106,8 @@ print(paste("Tamaño de muestra n:", n_result))
 # La probabilidad total del evento A se obtiene como:
 # P(A) = P(A ∩ B) + P(A ∩ B^c)
 # Por lo tanto, P(A) = 0.18 + 0.22 = 0.40
+
+# --- Ejecución Tarea 3 ---
 # Calcular y mostrar P(A) usando R
 prob_A_B <- 0.18
 prob_A_notB <- 0.22
