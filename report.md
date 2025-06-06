@@ -24,8 +24,24 @@ analysis_results <- analyze_vector(my_vector)
 print(my_vector)
 print(analysis_results)
 ```
-
 La ejecución del script muestra en consola el vector generado y la lista con sus estadísticos básicos.
+```cmd
+Vector generado aleatoriamente: 56 47 21 13 80 65 20 79 68 80 
+$mean
+[1] 52.9
+
+$median
+[1] 60.5
+
+$mode
+[1] 80
+
+$variance
+[1] 695.6556
+
+$sd
+[1] 26.37528
+```
 
 Para ilustrar visualmente la distribución de los valores se genera un diagrama de caja (boxplot) mediante `ggplot2`.
 
@@ -56,11 +72,20 @@ calculate_sample_size <- function(Z, p, q, N, e) {
   return(n)
 }
 
-n_result <- calculate_sample_size(Z = 1.96, p = 0.95, q = 0.05, N = 1068, e = 0.10)
-print(n_result)
+n_result <-
+  calculate_sample_size(Z = 1.96,
+                        p = 0.95,
+                        q = 0.05,
+                        N = 1068,
+                        e = 0.10)
+print(paste("Tamaño de muestra n:", n_result))
 ```
 
 La salida indica el tamaño de muestra requerido para los parámetros suministrados.
+
+```cmd
+"Tamaño de muestra n: 17.9575949304103"
+```
 
 # Tarea 3: Probabilidad total de A
 
