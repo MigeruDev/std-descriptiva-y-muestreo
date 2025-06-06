@@ -35,15 +35,15 @@ analyze_vector <- function(input_vector) {
   ))
 }
 
-# Vector de ejemplo de tamaño 10
-my_vector <- c(2, 4, 4, 5, 7, 7, 7, 8, 9, 10)
+# Generar un vector aleatorio de tamaño 10
+my_vector <- sample(1:100, 10, replace = TRUE)
 
 # Analizar el vector e imprimir resultados
 analysis_results <- analyze_vector(my_vector)
 print(analysis_results)
 
 # Generar un diagrama de caja del vector
-boxplot(my_vector, main = "Boxplot del vector ingresado", ylab = "Values")
+boxplot(my_vector, main = "Boxplot del vector ingresado", ylab = "Valores")
 
 # ---------------------------------------------------------------
 # Tarea 2: Cálculo del tamaño de la muestra
@@ -66,7 +66,7 @@ calculate_sample_size <- function(Z, p, q, N, e) {
 
 # Calcular el tamaño de la muestra con los parámetros proporcionados
 n_result <- calculate_sample_size(Z = 1.96, p = 0.95, q = 0.05, N = 1068, e = 0.10)
-print(paste("Sample size n:", n_result))
+print(paste("Tamaño de muestra n:", n_result))
 
 # ---------------------------------------------------------------
 # Tarea 3: Cálculo de probabilidades
