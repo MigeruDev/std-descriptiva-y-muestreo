@@ -43,7 +43,7 @@ analysis_results <- analyze_vector(my_vector)
 print(analysis_results)
 
 # Generar un diagrama de caja del vector
-boxplot(my_vector, main = "Boxplot of my_vector", ylab = "Values")
+boxplot(my_vector, main = "Boxplot del vector ingresado", ylab = "Values")
 
 # ---------------------------------------------------------------
 # Tarea 2: Cálculo del tamaño de la muestra
